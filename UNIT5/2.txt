@@ -1,0 +1,21 @@
+create table employee(id int,name varchar(80),sal int);
+insert into employee values(101,'yash patel',20000);
+insert into employee values(102,'luv patel',30000);
+insert into employee values(103,'om patel',40000);
+insert into employee values(104,'shrey patel',50000);
+insert into employee values(105,'arya patel',60000);
+select * from employee;
+declare
+c_name employee.name%type;
+c_sal employee.sal%type;
+cursor c is select name,sal from employee;
+BEGIN
+open c;
+loop
+fetch c into c_name,c_sal;
+exit when c%notfound;
+dbms_output.put_line('name:' || c_name || 'sal:' || c_sal);
+end loop;
+close c;
+end;
+/
