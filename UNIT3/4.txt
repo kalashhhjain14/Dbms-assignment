@@ -1,0 +1,18 @@
+create table product(prod_id varchar(80),prod_name varchar(80),prod_amt int,prod_comp varchar(80),prod_mfgdate date,prod_expdate date);
+insert into product values('p101','soap',200,'lux',TO_DATE('2025-01-01','yyyy-mm-dd'),TO_DATE('2027-01-01','yyyy-mm-dd'));
+insert into product values('p102','detergent',200,'arial',TO_DATE('2025-02-02','yyyy-mm-dd'),TO_DATE('2027-02-02','yyyy-mm-dd'));
+insert into product values('p103','shampoo',580,'loreal',TO_DATE('2025-03-03','yyyy-mm-dd'),TO_DATE('2027-03-03','yyyy-mm-dd'));
+insert into product values('p104','toothpaste',150,'colgate',TO_DATE('2025-04-04','yyyy-mm-dd'),TO_DATE('2027-04-04','yyyy-mm-dd'));
+insert into product values('p105','bodylotion',250,'ponds',TO_DATE('2025-05-05','yyyy-mm-dd'),TO_DATE('2027-05-05','yyyy-mm-dd'));
+select * from product;
+create table product_new(prod_id varchar(80),prod_name varchar(80),prod_amt int,prod_comp varchar(80),prod_mfgdate date,prod_expdate date);
+create or replace trigger before_insert_product
+before insert on product
+for each row
+BEGIN
+INSERT INTO product_new values(:new.prod_id,:new.prod_name,:new.prod_amt,:new.prod_comp,:new.prod_mfgdate,:new.prod_expdate);
+end;
+/
+INSERT INTO product values('p100','bodywash',250,'m-caffine',TO_DATE('2025-06-06','yyyy-mm-dd'),TO_DATE('2027-06-06','yyyy-mm-dd'));
+select * from product;
+select * from product_new;
