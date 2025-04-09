@@ -6,8 +6,8 @@ insert into product values('p104','toothpaste',150,'colgate',TO_DATE('2025-04-04
 insert into product values('p105','bodylotion',250,'ponds',TO_DATE('2025-05-05','yyyy-mm-dd'),TO_DATE('2027-05-05','yyyy-mm-dd'));
 select * from product;
 create table product_new(prod_id varchar(80),prod_name varchar(80),prod_amt int,prod_comp varchar(80),prod_mfgdate date,prod_expdate date);
-create or replace trigger before_insert_product
-before insert on product
+create or replace trigger after_insert_product
+after insert on product
 for each row
 BEGIN
 INSERT INTO product_new values(:new.prod_id,:new.prod_name,:new.prod_amt,:new.prod_comp,:new.prod_mfgdate,:new.prod_expdate);
